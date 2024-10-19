@@ -14,7 +14,7 @@ db = client['sample_airbnb']
 collection = db['listingsAndReviews']
 
 # Sample approved email IDs (for demonstration purposes)
-approved_emails = ["user1@example.com", "user2@example.com"]  # Add your approved email IDs here
+approved_emails = ["user1@example.com", "user2@example.com"]  
 
 # Function to fetch data from MongoDB
 def fetch_data():
@@ -29,7 +29,7 @@ def convert_decimal_columns(df):
 
 # Function to visualize data
 def visualize_data(df, plot_type='histogram', field='price', bins=50):
-    df = convert_decimal_columns(df)  # Convert Decimal128 to float
+    df = convert_decimal_columns(df)  
     plt.figure(figsize=(10, 6))
     
     if plot_type == 'histogram':
@@ -43,7 +43,7 @@ def visualize_data(df, plot_type='histogram', field='price', bins=50):
         plt.title(f'{field.capitalize()} Boxplot')
         plt.ylabel(field.capitalize())
         
-    st.pyplot(plt)  # Display the plot in Streamlit
+    st.pyplot(plt)  
 
 # Langchain & Ollama Integration
 # Initialize Ollama with the 'gemma2' model
@@ -60,9 +60,6 @@ prompt = PromptTemplate(
 
 # Example tool for querying MongoDB
 def query_mongodb(query: str):
-    # Here you would write logic to query MongoDB based on the user's query
-    # For now, we return a mocked result
-    # Example of querying MongoDB based on the user's natural language query
     results = collection.find({"address.market": {"$regex": query, "$options": "i"}}).limit(5)
     return pd.DataFrame(list(results)).to_string()
 
